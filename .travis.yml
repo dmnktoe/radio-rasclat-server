@@ -1,0 +1,25 @@
+dist: trusty
+
+language: node_js
+node_js:
+  - '10'
+
+addons:
+  chrome: stable
+
+cache:
+  directories:
+    - ./node_modules
+
+install:
+  - npm install
+
+before_script:
+  - npm run prettier
+
+script:
+  - npm run lint
+  - npm test
+
+after_success:
+  - codecov

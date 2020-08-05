@@ -1,0 +1,155 @@
+/* ===================
+   Import Environment
+=================== */
+require('custom-env').env(true);
+
+/* ===================
+   Import Node Modules
+=================== */
+const express = require('express'); // Fast, unopinionated, minimalist web framework for node.
+const app = express(); // Initiate Express Application
+const router = express.Router(); // Creates a new router object.
+const cors = require('cors');
+const path = require('path'); // NodeJS Package for file paths
+const port = process.env.PORT || 8080; // Allows heroku to set port
+const morgan = require('morgan');
+const favicon = require('express-favicon');
+const { version } = require('./package.json');
+require('dotenv').config();
+
+/* ===================
+   MongoDB config
+=================== */
+const mongoose = require('mongoose'); // Node Tool for MongoDB
+mongoose.Promise = global.Promise;
+const config = require('./config/database'); // Mongoose Config
+
+/* ===================
+   Import routes
+=================== */
+const artists = require('./routes/artists'); // Import Blog Routes
+const genres = require('./routes/genres'); // Import Blog Routes
+const meta = require('./routes/meta'); // Import Blog Routes
+const recordings = require('./routes/recordings'); // Import Blog Routes
+const shows = require('./routes/shows'); // Import Blog Routes
+const auth = require('./routes/authentication'); // Import Authentication Routes
+
+/* ===================
+   Error Tracking
+=================== */
+const Sentry = require('@sentry/node');
+Sentry.init({
+  dsn: 'https://7d3e725a3d8b41be9299e8270f154c9b@sentry.io/1863652',
+  environment: process.env.NODE_ENV,
+  release: version,
+});
+
+/* ===================
+   Cronjobs
+=================== */
+const cron = require('node-cron');
+const algoliaRecordingsExport = require('./controllers/cronjobs/algolia_recordings_export');
+
+cron.schedule('0 */12 * * *', () => {
+  algoliaRecordingsExport.algoliaRecordingsExport();
+});
+
+/* ===================
+   Database Connection
+=================== */
+mongoose.connect(
+  config.uri,
+  {
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true,
+  },
+  (err) => {
+    if (err) {
+      Sentry.captureException(err);
+    } else {
+      console.log('Connected to ' + config.db);
+    }
+  }
+);
+mongoose.set('useCreateIndex', true);
+
+/* ===================
+   Middlewares
+=================== */
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('tiny'));
+}
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+/* ===================
+   Stats API
+=================== */
+const initStats = require('@phil-r/stats');
+const { statsMiddleware, getStats } = initStats({
+  endpointStats: true,
+  complexEndpoints: ['/artists/artist/:id', '/genres/genre/:id', '/recordings/recording/:id', '/shows/show/:id'],
+  customStats: false,
+  addHeader: true,
+});
+app.use(statsMiddleware);
+
+/* ===================
+   Swagger API Docs
+=================== */
+const expressSwagger = require('express-swagger-generator')(app);
+let options = {
+  swaggerDefinition: {
+    info: {
+      description: 'It manages all show recordings, their corresponding artists and also the user authentication.',
+      title: 'Radio Rasclat API',
+      version: '2.0.0',
+    },
+    host: process.env.HOST,
+    basePath: '',
+    produces: ['application/json', 'application/xml'],
+    schemes: ['https'],
+    securityDefinitions: {
+      JWT: {
+        type: 'apiKey',
+        in: 'header',
+        name: 'Authorization',
+        description: '',
+      },
+    },
+  },
+  basedir: __dirname, //app absolute path
+  files: ['./routes/**/*.js'], //Path to the API handle folder
+};
+expressSwagger(options);
+
+/* ===================
+   Routes
+=================== */
+app.use('/artists', artists);
+app.use('/genres', genres);
+app.use('/meta', meta);
+app.use('/recordings', recordings);
+app.use('/shows', shows);
+app.use('/auth', auth);
+
+/* ===================
+   Render base pages
+=================== */
+app.get('/stats', (req, res) => res.send(getStats()));
+
+app.get('*', (req, res) => {
+  res.sendStatus(200);
+});
+
+/* ===================
+   Start Server on Port 8080
+=================== */
+app.listen(port, () => {
+  console.log('Listening on port ' + port + ' in ' + process.env.NODE_ENV + ' mode');
+});
+
+module.exports = app;
