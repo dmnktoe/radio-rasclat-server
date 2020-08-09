@@ -1,7 +1,7 @@
 {
   "name": "radio-rasclat-server",
-  "version": "1.0.0",
-  "description": "Radio Rasclat server for managing shows, sets and the archive.",
+  "version": "1.0.1",
+  "description": "The Radio Rasclat backend manages all CRUD requests for shows, recordings, their corresponding artists and also the user authentication.",
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=development nodemon index",
