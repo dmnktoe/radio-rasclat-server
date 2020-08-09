@@ -104,9 +104,10 @@ const expressSwagger = require('express-swagger-generator')(app);
 let options = {
   swaggerDefinition: {
     info: {
-      description: 'It manages all show recordings, their corresponding artists and also the user authentication.',
+      description:
+        'The Radio Rasclat backend manages all CRUD requests for shows, recordings, their corresponding artists and also the user authentication.',
       title: 'Radio Rasclat API',
-      version: '2.0.0',
+      version: version,
     },
     host: process.env.HOST,
     basePath: '',
