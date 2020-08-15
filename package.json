@@ -1,6 +1,6 @@
 {
   "name": "radio-rasclat-server",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "The Radio Rasclat backend manages all CRUD requests for shows, recordings, their corresponding artists and also the user authentication.",
   "main": "index.js",
   "scripts": {
