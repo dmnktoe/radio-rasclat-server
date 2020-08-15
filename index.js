@@ -27,11 +27,13 @@ const config = require('./config/database'); // Mongoose Config
 /* ===================
    Import routes
 =================== */
-const artists = require('./routes/artists'); // Import Blog Routes
-const genres = require('./routes/genres'); // Import Blog Routes
-const meta = require('./routes/meta'); // Import Blog Routes
-const recordings = require('./routes/recordings'); // Import Blog Routes
-const shows = require('./routes/shows'); // Import Blog Routes
+const artists = require('./routes/artists'); // Import Artist Routes
+const blog = require('./routes/blog'); // Import Blog Routes
+const genres = require('./routes/genres'); // Import Genres Routes
+const meta = require('./routes/meta'); // Import Meta Routes
+const recordings = require('./routes/recordings'); // Import Recordings Routes
+const projects = require('./routes/projects'); // Import Projects Routes
+const shows = require('./routes/shows'); // Import Shows Routes
 const auth = require('./routes/authentication'); // Import Authentication Routes
 
 /* ===================
@@ -131,9 +133,11 @@ expressSwagger(options);
    Routes
 =================== */
 app.use('/artists', artists);
+app.use('/blog', blog);
 app.use('/genres', genres);
 app.use('/meta', meta);
 app.use('/recordings', recordings);
+app.use('/projects', projects);
 app.use('/shows', shows);
 app.use('/auth', auth);
 
