@@ -29,7 +29,9 @@ const config = require('./config/database'); // Mongoose Config
 =================== */
 const artists = require('./routes/artists'); // Import Artist Routes
 const blog = require('./routes/blog'); // Import Blog Routes
+const changelog = require('./routes/changelog'); // Import Changelog Routes
 const genres = require('./routes/genres'); // Import Genres Routes
+const languages = require('./routes/languages'); // Import Language Routes
 const meta = require('./routes/meta'); // Import Meta Routes
 const recordings = require('./routes/recordings'); // Import Recordings Routes
 const projects = require('./routes/projects'); // Import Projects Routes
@@ -134,7 +136,9 @@ expressSwagger(options);
 =================== */
 app.use('/artists', artists);
 app.use('/blog', blog);
+app.use('/changelog', changelog);
 app.use('/genres', genres);
+app.use('/languages', languages);
 app.use('/meta', meta);
 app.use('/recordings', recordings);
 app.use('/projects', projects);
