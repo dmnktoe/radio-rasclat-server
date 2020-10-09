@@ -179,7 +179,7 @@ router.post(
           res.json({
             success: false,
             message: 'An unknown error occurred while creating the project in the database.',
-            error: error
+            error: error,
           });
         }
       });

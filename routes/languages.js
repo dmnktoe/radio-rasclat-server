@@ -1,5 +1,8 @@
 const fetch = require('node-fetch');
-const crowdinUrl = "https://api.crowdin.com/api/project/radio-rasclat-web/status?login=dmnktoe&account-key=" + process.env.CROWDIN_ACCOUNT_KEY + "&json";
+const crowdinUrl =
+  'https://api.crowdin.com/api/project/radio-rasclat-web/status?login=dmnktoe&account-key=' +
+  process.env.CROWDIN_ACCOUNT_KEY +
+  '&json';
 
 const express = require('express');
 const router = express.Router();

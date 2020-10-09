@@ -153,7 +153,8 @@ router.post(
               .catch((error) => {
                 res.json({
                   success: false,
-                  message: 'An unknown error occurred while updating the new blog post with the given Algolia objectID.',
+                  message:
+                    'An unknown error occurred while updating the new blog post with the given Algolia objectID.',
                   error: error,
                 });
               });
@@ -194,58 +195,52 @@ router.post(
  * @returns {Error} default - Unexpected error
  * @security JWT
  */
-router.put(
-  '/update',
-  jwtMiddleware,
-  upload.single('image'),
-  uploadImageController.uploadImages,
-  (req, res) => {
-    const _id = req.body._id;
-    Blog.findOneAndUpdate(
-      {
-        _id: _id,
-      },
-      {
-        $set: req.body,
-      },
-      {
-        new: true,
+router.put('/update', jwtMiddleware, upload.single('image'), uploadImageController.uploadImages, (req, res) => {
+  const _id = req.body._id;
+  Blog.findOneAndUpdate(
+    {
+      _id: _id,
+    },
+    {
+      $set: req.body,
+    },
+    {
+      new: true,
+    }
+  )
+    .then((blogPost) => {
+      index
+        .saveObject(blogPost)
+        .then(() => {
+          res.json({
+            success: true,
+            message: 'The blog post has been updated.',
+          });
+        })
+        .catch((err) => {
+          Sentry.captureException(err);
+          res.json({
+            success: false,
+            message: 'An unknown error occurred while updating the blog post to the Algolia Search API.',
+            error: err,
+          });
+        });
+    })
+    .catch((error) => {
+      if (error.code === 11000) {
+        res.json({
+          success: false,
+          message: 'This blog post already exists in the database.',
+        });
+      } else {
+        Sentry.captureException(error);
+        res.json({
+          success: false,
+          message: 'An unknown error occurred while creating the blog post in the database.',
+        });
       }
-    )
-      .then((blogPost) => {
-        index
-          .saveObject(blogPost)
-          .then(() => {
-            res.json({
-              success: true,
-              message: 'The blog post has been updated.',
-            });
-          })
-          .catch((err) => {
-            Sentry.captureException(err);
-            res.json({
-              success: false,
-              message: 'An unknown error occurred while updating the blog post to the Algolia Search API.',
-              error: err,
-            });
-          });
-      })
-      .catch((error) => {
-        if (error.code === 11000) {
-          res.json({
-            success: false,
-            message: 'This blog post already exists in the database.',
-          });
-        } else {
-          Sentry.captureException(error);
-          res.json({
-            success: false,
-            message: 'An unknown error occurred while creating the blog post in the database.',
-          });
-        }
-      });
-  }
-);
+    });
+});
 
 /* ===============================================================
  DELETE /blog/delete
