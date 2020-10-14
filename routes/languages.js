@@ -1,9 +1,6 @@
 const fetch = require('node-fetch');
-const crowdinUrl =
-  'https://api.crowdin.com/api/project/radio-rasclat-web/status?login=dmnktoe&account-key=' +
-  process.env.CROWDIN_ACCOUNT_KEY +
-  '&json';
-
+const crowdinUrl = process.env.CROWDIN_PROJECT_URL;
+const _ = require('lodash');
 const express = require('express');
 const router = express.Router();
 
@@ -18,11 +15,40 @@ const router = express.Router();
  * @returns {Error} default - Unexpected error
  */
 router.get('/', (req, res) => {
-  fetch(crowdinUrl)
-    .then((response) => response.json())
-    .then((json) => {
-      res.json(json);
-    })
+  const token = 'Bearer ' + process.env.CROWDIN_AUTH_KEY;
+  fetch(crowdinUrl, {
+    method: 'GET',
+    withCredentials: true,
+    credentials: 'include',
+    headers: {
+      'Authorization': token,
+      'Content-Type': 'application/json'
+    }
+  }).then((response) => response.json())
+    .then((languages) => {
+      fetch(crowdinUrl + '/languages/progress', {
+        method: 'GET',
+        withCredentials: true,
+        credentials: 'include',
+        headers: {
+          'Authorization': token,
+          'Content-Type': 'application/json'
+        }
+      })
+        .then((response) => response.json())
+        .then((progress) => {
+          _.forEach(progress.data, (item, i) => {
+            progress.data[i] = item.data;
+          })
+          let newLanguages = languages.data["targetLanguages"].map(itm => ({
+            ...progress.data.find((item) => (item.languageId === itm.id) && item),
+            ...itm
+          }));
+          res.json(newLanguages);
+        })
+        .catch((error) => {
+        throw error;
+      })})
     .catch((error) => {
       throw error;
     });
