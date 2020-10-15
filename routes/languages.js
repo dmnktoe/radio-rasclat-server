@@ -21,34 +21,36 @@ router.get('/', (req, res) => {
     withCredentials: true,
     credentials: 'include',
     headers: {
-      'Authorization': token,
-      'Content-Type': 'application/json'
-    }
-  }).then((response) => response.json())
+      Authorization: token,
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
     .then((languages) => {
       fetch(crowdinUrl + '/languages/progress', {
         method: 'GET',
         withCredentials: true,
         credentials: 'include',
         headers: {
-          'Authorization': token,
-          'Content-Type': 'application/json'
-        }
+          Authorization: token,
+          'Content-Type': 'application/json',
+        },
       })
         .then((response) => response.json())
         .then((progress) => {
           _.forEach(progress.data, (item, i) => {
             progress.data[i] = item.data;
-          })
-          let newLanguages = languages.data["targetLanguages"].map(itm => ({
-            ...progress.data.find((item) => (item.languageId === itm.id) && item),
-            ...itm
+          });
+          let newLanguages = languages.data['targetLanguages'].map((itm) => ({
+            ...progress.data.find((item) => item.languageId === itm.id && item),
+            ...itm,
           }));
           res.json(newLanguages);
         })
         .catch((error) => {
-        throw error;
-      })})
+          throw error;
+        });
+    })
     .catch((error) => {
       throw error;
     });
