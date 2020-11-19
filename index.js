@@ -36,6 +36,7 @@ const meta = require('./routes/meta'); // Import Meta Routes
 const recordings = require('./routes/recordings'); // Import Recordings Routes
 const projects = require('./routes/projects'); // Import Projects Routes
 const shows = require('./routes/shows'); // Import Shows Routes
+const status = require('./routes/status'); // Import Shows Routes
 const auth = require('./routes/authentication'); // Import Authentication Routes
 
 /* ===================
@@ -143,6 +144,7 @@ app.use('/meta', meta);
 app.use('/recordings', recordings);
 app.use('/projects', projects);
 app.use('/shows', shows);
+app.use('/status', status);
 app.use('/auth', auth);
 
 /* ===================
