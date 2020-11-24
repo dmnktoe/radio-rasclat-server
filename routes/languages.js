@@ -27,7 +27,7 @@ router.get('/', (req, res) => {
   })
     .then((response) => response.json())
     .then((languages) => {
-      fetch(crowdinUrl + '/languages/progress', {
+      fetch(crowdinUrl + '/languages/progress?limit=50', {
         method: 'GET',
         withCredentials: true,
         credentials: 'include',
