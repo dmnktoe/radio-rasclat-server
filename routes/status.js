@@ -17,37 +17,33 @@ let uptimeRobotBaseUrl = process.env.UPTIMEROBOT_API_URL;
  */
 router.get('/', (req, res) => {
   const body = {
-    'api_key': process.env.UPTIMEROBOT_API_KEY,
-    'monitors': '783021589-783021541-783288091'
+    api_key: process.env.UPTIMEROBOT_API_KEY,
+    monitors: '783021589-783021541-783288091',
   };
   fetch(uptimeRobotBaseUrl + 'getMonitors', {
     method: 'POST',
     body: JSON.stringify(body),
-    headers: { 'Content-Type': 'application/json' }
+    headers: { 'Content-Type': 'application/json' },
   })
     .then((response) => response.json())
     .then((status) => {
-      const statusArr = [
-        status.monitors['0'].status,
-        status.monitors['1'].status,
-        status.monitors['2'].status
-      ];
+      const statusArr = [status.monitors['0'].status, status.monitors['1'].status, status.monitors['2'].status];
 
-      let successCheck = arr => arr.every(v => v === 2);
-      let failureCheck = arr => arr.every(v => v === 9);
+      let successCheck = (arr) => arr.every((v) => v === 2);
+      let failureCheck = (arr) => arr.every((v) => v === 9);
 
       if (successCheck(statusArr)) {
         res.json({
-          status: 2
+          status: 2,
         });
       } else {
         if (failureCheck(statusArr)) {
           res.json({
-            status: 0
+            status: 0,
           });
         } else {
           res.json({
-            status: 1
+            status: 1,
           });
         }
       }

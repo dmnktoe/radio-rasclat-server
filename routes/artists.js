@@ -27,17 +27,29 @@ const uploadImageController = require('../controllers/uploaders/upload_image');
  * @returns {Error} default - Unexpected error
  */
 router.get('/', (req, res) => {
-  Artist.find((err, artists) => {
-    if (err) {
-      res.json({ success: false, message: err });
-    } else {
-      if (!artists) {
-        res.json({ success: false, message: 'No artists found.' });
+  Artist.aggregate(
+    [
+      {
+        $lookup: {
+          from: 'recordings',
+          localField: '_id',
+          foreignField: 'artists',
+          as: 'recordings',
+        },
+      },
+    ],
+    (err, artists) => {
+      if (err) {
+        res.json({ success: false, message: err });
       } else {
-        res.json(artists);
+        if (!artists) {
+          res.json({ success: false, message: 'No artists found.' });
+        } else {
+          res.json(artists);
+        }
       }
     }
-  }).sort({
+  ).sort({
     slug: 1,
   });
 });
