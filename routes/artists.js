@@ -84,6 +84,37 @@ router.get('/artist/:id', (req, res) => {
               as: 'recordings',
             },
           },
+          {
+            $unwind: {
+              path: '$recordings',
+              preserveNullAndEmptyArrays: true,
+            },
+          },
+          {
+            $sort: {
+              'recordings.timeStart': -1,
+            },
+          },
+          {
+            $lookup: {
+              from: 'genres',
+              localField: 'recordings.genres',
+              foreignField: '_id',
+              as: 'recordings.genres',
+            },
+          },
+          {
+            $group: {
+              _id: '$_id',
+              title: { $first: '$title' },
+              description: { $first: '$description' },
+              image: { $first: '$image' },
+              slug: { $first: '$slug' },
+              recordings: {
+                $push: '$recordings',
+              },
+            },
+          },
         ],
         (err, artist) => {
           if (err) {
@@ -111,6 +142,36 @@ router.get('/artist/:id', (req, res) => {
               localField: '_id',
               foreignField: 'artists',
               as: 'recordings',
+            },
+          },
+          {
+            $unwind: {
+              path: '$recordings',
+              preserveNullAndEmptyArrays: true,
+            },
+          },
+          {
+            $sort: {
+              'recordings.timeStart': -1,
+            },
+          },
+          {
+            $lookup: {
+              from: 'genres',
+              localField: 'recordings.genres',
+              foreignField: '_id',
+              as: 'recordings.genres',
+            },
+          },
+          {
+            $group: {
+              _id: '$_id',
+              title: { $first: '$title' },
+              description: { $first: '$description' },
+              image: { $first: '$image' },
+              recordings: {
+                $push: '$recordings',
+              },
             },
           },
         ],
