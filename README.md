@@ -3,7 +3,7 @@
 # Radio Rasclat Server
 
 <p>
-<img src="https://img.shields.io/github/package-json/v/RadioRasclat/radio-rasclat-server?color=%237d29cc.svg">
+<img src="https://img.shields.io/github/package-json/v/RadioRasclat/radio-rasclat-server.svg?color=%237d29cc">
 </p>
 
 ## Configuration
