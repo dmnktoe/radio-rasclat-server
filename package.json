@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dmnktoe/radio-rasclat-server.git"
+    "url": "git+https://github.com/RadioRasclat/radio-rasclat-server.git"
   },
   "keywords": [
     "radio",
@@ -31,9 +31,9 @@
   "author": "Domenik Toefflinger",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/dmnktoe/radio-rasclat-server/issues"
+    "url": "https://github.com/RadioRasclat/radio-rasclat-server/issues"
   },
-  "homepage": "https://github.com/dmnktoe/radio-rasclat-server#readme",
+  "homepage": "https://github.com/RadioRasclat/radio-rasclat-server#readme",
   "dependencies": {
     "@babel/core": "^7.12.10",
     "@babel/plugin-transform-runtime": "^7.12.10",

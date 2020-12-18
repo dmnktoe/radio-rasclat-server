@@ -14,7 +14,7 @@ const router = express.Router();
  * @returns {Error} default - Unexpected error
  */
 router.get('/radio-rasclat-web', (req, res) => {
-  const url = 'https://api.github.com/repos/dmnktoe/radio-rasclat-web/releases';
+  const url = 'https://api.github.com/repos/RadioRasclat/radio-rasclat-web/releases';
   fetch(url)
     .then((response) => response.json())
     .then((json) => {
@@ -36,7 +36,7 @@ router.get('/radio-rasclat-web', (req, res) => {
  * @returns {Error} default - Unexpected error
  */
 router.get('/radio-rasclat-ios', (req, res) => {
-  const url = 'https://api.github.com/repos/dmnktoe/radio-rasclat-ios/releases';
+  const url = 'https://api.github.com/repos/RadioRasclat/radio-rasclat-ios/releases';
   fetch(url)
     .then((response) => response.json())
     .then((json) => {
@@ -58,7 +58,7 @@ router.get('/radio-rasclat-ios', (req, res) => {
  * @returns {Error} default - Unexpected error
  */
 router.get('/radio-rasclat-server', (req, res) => {
-  const url = 'https://api.github.com/repos/dmnktoe/radio-rasclat-server/releases';
+  const url = 'https://api.github.com/repos/RadioRasclat/radio-rasclat-server/releases';
   fetch(url)
     .then((response) => response.json())
     .then((json) => {

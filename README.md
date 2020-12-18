@@ -3,8 +3,7 @@
 # Radio Rasclat Server
 
 <p>
-<img src="https://img.shields.io/github/package-json/v/dmnktoe/radio-rasclat-server.svg">
-<img src="https://david-dm.org/dmnktoe/radio-rasclat-server/status.svg">
+<img src="https://img.shields.io/github/package-json/v/RadioRasclat/radio-rasclat-server?color=%237d29cc.svg">
 </p>
 
 ## Configuration
@@ -22,8 +21,7 @@ Set the following environment variables
 <!-- prettier-ignore -->
 | Branch    | Tests | Code Coverage | Comments                  |
 | --------- | ----- | ------------- | ------------------------- |
-| `develop` | <img src="https://travis-ci.com/dmnktoe/radio-rasclat-server.svg?token=zEu41NzranCVykbMZnLs&branch=develop"> | [![codecov](https://codecov.io/gh/dmnktoe/radio-rasclat-server/branch/develop/graph/badge.svg?token=lcRoBB399S)](https://codecov.io/gh/dmnktoe/radio-rasclat-server) | Work in progress          |
-| `master`  | <img src="https://travis-ci.com/dmnktoe/radio-rasclat-server.svg?token=zEu41NzranCVykbMZnLs&branch=master"> | [![codecov](https://codecov.io/gh/dmnktoe/radio-rasclat-server/branch/master/graph/badge.svg?token=lcRoBB399S)](https://codecov.io/gh/dmnktoe/radio-rasclat-server) | Latest Production Release |
+| `master`  | ![Build](https://github.com/RadioRasclat/radio-rasclat-server/workflows/Build/badge.svg) | [![codecov](https://codecov.io/gh/RadioRasclat/radio-rasclat-server/branch/master/graph/badge.svg?token=lcRoBB399S)](https://codecov.io/gh/RadioRasclat/radio-rasclat-server) | Latest Production Release |
 
 ### Prerequisites
 
