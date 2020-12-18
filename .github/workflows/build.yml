@@ -16,6 +16,35 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      - name: Setup staging environment
+        run: |
+          touch .env.staging
+          echo NODE_ENV=${{ secrets.NODE_ENV }} >> .env.staging
+          echo HOST=${{ secrets.HOST }} >> .env.staging
+          echo PORT=${{ secrets.PORT }} >> .env.staging
+          echo DB_URL=${{ secrets.DB_URL }} >> .env.staging
+          echo DB_NAME=${{ secrets.DB_NAME }} >> .env.staging
+          echo RADIO_URL=${{ secrets.RADIO_URL }} >> .env.staging
+          echo ALGOLIA_APP_ID=${{ secrets.ALGOLIA_APP_ID }} >> .env.staging
+          echo ALGOLIA_ADMIN_KEY=${{ secrets.ALGOLIA_ADMIN_KEY }} >> .env.staging
+          echo ALGOLIA_INDEX_ARTISTS=${{ secrets.ALGOLIA_INDEX_ARTISTS }} >> .env.staging
+          echo ALGOLIA_INDEX_BLOG=${{ secrets.ALGOLIA_INDEX_BLOG }} >> .env.staging
+          echo ALGOLIA_INDEX_RECORDINGS=${{ secrets.ALGOLIA_INDEX_RECORDINGS }} >> .env.staging
+          echo ALGOLIA_INDEX_PROJECTS=${{ secrets.ALGOLIA_INDEX_PROJECTS }} >> .env.staging
+          echo ALGOLIA_INDEX_SHOWS=${{ secrets.ALGOLIA_INDEX_SHOWS }} >> .env.staging
+          echo BACKEND_ADMIN_USER=${{ secrets.BACKEND_ADMIN_USER }} >> .env.staging
+          echo BACKEND_ADMIN_PASSWORD=${{ secrets.BACKEND_ADMIN_PASSWORD }} >> .env.staging
+          echo WASABI_KEY=${{ secrets.WASABI_KEY }} >> .env.staging
+          echo WASABI_KEY_SECRET=${{ secrets.WASABI_KEY_SECRET }} >> .env.staging
+          echo WASABI_REGION=${{ secrets.WASABI_REGION }} >> .env.staging
+          echo WASABI_UPLOAD_CONTAINER=${{ secrets.WASABI_UPLOAD_CONTAINER }} >> .env.staging
+          echo GOOGLE_API_PRIVATE_KEY=${{ secrets.GOOGLE_API_PRIVATE_KEY }} >> .env.staging
+          echo GOOGLE_API_CLIENT_E_MAIL=${{ secrets.GOOGLE_API_CLIENT_E_MAIL }} >> .env.staging
+          echo CROWDIN_AUTH_KEY=${{ secrets.CROWDIN_AUTH_KEY }} >> .env.staging
+          echo CROWDIN_PROJECT_URL=${{ secrets.CROWDIN_PROJECT_URL }} >> .env.staging
+          echo UPTIMEROBOT_API_KEY=${{ secrets.UPTIMEROBOT_API_KEY }} >> .env.staging
+          echo UPTIMEROBOT_API_URL=${{ secrets.UPTIMEROBOT_API_URL }} >> .env.staging
+          cat .env.staging
       - name: Install
         run: npm install
       - name: Prettier
