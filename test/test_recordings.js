@@ -103,19 +103,7 @@ describe('Recordings', () => {
           });
       });
     });
-    describe('/GET recordings/top-3-viewed', () => {
-      it('should GET the three most viewed recordings', (done) => {
-        chai
-          .request(app)
-          .get('/recordings/top-3-viewed')
-          .end((err, res) => {
-            res.should.have.status(200);
-            res.body.should.be.a('array');
-            res.body.length.should.be.eql(3);
-            done();
-          });
-      });
-    });
+    // TODO: Test routes based on Google Analytics
   });
   describe('Admin routes', () => {
     describe('/POST recordings', () => {
