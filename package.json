@@ -78,7 +78,7 @@
     "prettier": "^2.2.1",
     "rand-token": "^1.0.1",
     "request": "^2.88.2",
-    "sharp": "^0.25.4",
+    "sharp": "^0.27.2",
     "should": "^13.2.3",
     "socket.io": "^2.4.1"
   },
