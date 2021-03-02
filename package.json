@@ -56,7 +56,7 @@
     "express": "^4.17.1",
     "express-favicon": "^2.0.1",
     "express-params": "0.0.3",
-    "faker": "^4.1.0",
+    "faker": "^5.4.0",
     "form-data": "^3.0.1",
     "googleapis": "^49.0.0",
     "image-size": "^0.8.3",
