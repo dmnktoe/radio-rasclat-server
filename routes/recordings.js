@@ -281,7 +281,7 @@ router.get('/most-viewed', (req, res) => {
    GET /recordings/top-3-viewed
 =============================================================== */
 /**
- * Get the 10 most viewed recordings by Google Analytics
+ * Get the 3 most viewed recordings by Google Analytics
  * @route GET /recordings/top-3-viewed
  * @group Recordings API - Manage audio recordings.
  * @returns {object} 200 - An array of user info
