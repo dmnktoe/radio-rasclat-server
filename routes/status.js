@@ -18,7 +18,7 @@ let uptimeRobotBaseUrl = process.env.UPTIMEROBOT_API_URL;
 router.get('/', (req, res) => {
   const body = {
     api_key: process.env.UPTIMEROBOT_API_KEY,
-    monitors: '783021589-783021541-783288091',
+    monitors: '783021589-787292062-787357176-783021541',
   };
   fetch(uptimeRobotBaseUrl + 'getMonitors', {
     method: 'POST',
@@ -27,7 +27,7 @@ router.get('/', (req, res) => {
   })
     .then((response) => response.json())
     .then((status) => {
-      const statusArr = [status.monitors['0'].status, status.monitors['1'].status, status.monitors['2'].status];
+      const statusArr = [status.monitors['0'].status, status.monitors['1'].status, status.monitors['2'].status, status.monitors['3'].status];
 
       let successCheck = (arr) => arr.every((v) => v === 2);
       let failureCheck = (arr) => arr.every((v) => v === 9);
