@@ -36,7 +36,7 @@
   "homepage": "https://github.com/RadioRasclat/radio-rasclat-server#readme",
   "dependencies": {
     "@babel/core": "^7.13.8",
-    "@babel/plugin-transform-runtime": "^7.13.9",
+    "@babel/plugin-transform-runtime": "^7.13.10",
     "@babel/runtime": "^7.13.9",
     "@phil-r/stats": "^1.4.3",
     "@sentry/node": "^5.30.0",
