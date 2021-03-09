@@ -41,7 +41,7 @@
     "@phil-r/stats": "^1.4.3",
     "@sentry/node": "^5.30.0",
     "@types/socket.io": "^2.1.13",
-    "algoliasearch": "^3.35.1",
+    "algoliasearch": "^4.8.6",
     "async": "^3.2.0",
     "authy": "^1.4.0",
     "aws-sdk": "^2.854.0",
