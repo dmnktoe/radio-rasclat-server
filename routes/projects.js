@@ -70,7 +70,7 @@ router.get('/project/:id', (req, res) => {
             res.json({ success: false, message: 'Not a valid project ID.' });
           } else {
             if (!project || project.length === 0) {
-              res.json({ success: false, message: 'Project not found.' });
+              res.status(404).json({ success: false, message: 'Project not found.' });
             } else {
               res.json(project[0]); // Return success
             }
@@ -91,7 +91,7 @@ router.get('/project/:id', (req, res) => {
             res.json({ success: false, message: 'Not a valid project ID.' });
           } else {
             if (project.length === 0) {
-              res.json({ success: false, message: 'Project not found.' });
+              res.status(404).json({ success: false, message: 'Project not found.' });
             } else {
               res.json(project[0]); // Return success
             }

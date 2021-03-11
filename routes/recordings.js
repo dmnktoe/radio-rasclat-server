@@ -88,12 +88,12 @@ router.get('/', cacheMiddleware(30), (req, res) => {
     ],
     (err, recordings) => {
       if (err) {
-        res.json({ success: false, message: err });
+        res.status(500).json({ success: false, message: err });
       } else {
         if (!recordings) {
-          res.json({ success: false, message: 'No recordings found.' });
+          res.status(404).json({ success: false, message: 'No recordings found.' });
         } else {
-          res.json(recordings);
+          res.status(200).json(recordings);
         }
       }
     }
@@ -152,12 +152,12 @@ router.get('/recording/:id', (req, res) => {
         ],
         (err, recording) => {
           if (err) {
-            res.json({ success: false, message: 'Not a valid recording ID.' });
+            res.status(500).json({ success: false, message: 'Not a valid recording ID.' });
           } else {
             if (!recording || recording.length === 0) {
-              res.json({ success: false, message: 'Recording not found.' });
+              res.status(404).json({ success: false, message: 'Recording not found.' });
             } else {
-              res.json(recording[0]); // Return success
+              res.status(200).json(recording[0]); // Return success
             }
           }
         }
@@ -200,12 +200,12 @@ router.get('/recording/:id', (req, res) => {
         ],
         (err, recording) => {
           if (err) {
-            res.json({ success: false, message: 'Not a valid recording ID.' });
+            res.status(500).json({ success: false, message: 'Not a valid recording ID.' });
           } else {
             if (recording.length === 0) {
-              res.json({ success: false, message: 'Recording not found.' });
+              res.status(404).json({ success: false, message: 'Recording not found.' });
             } else {
-              res.json(recording[0]); // Return success
+              res.status(200).json(recording[0]); // Return success
             }
           }
         }

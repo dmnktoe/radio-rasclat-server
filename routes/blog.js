@@ -70,7 +70,7 @@ router.get('/post/:id', (req, res) => {
             res.json({ success: false, message: 'Not a valid blog post ID.' });
           } else {
             if (!blogPost || blogPost.length === 0) {
-              res.json({ success: false, message: 'Blog post not found.' });
+              res.status(404).json({ success: false, message: 'Blog post not found.' });
             } else {
               res.json(blogPost[0]); // Return success
             }
@@ -91,7 +91,7 @@ router.get('/post/:id', (req, res) => {
             res.json({ success: false, message: 'Not a valid blog post ID.' });
           } else {
             if (blogPost.length === 0) {
-              res.json({ success: false, message: 'Blog post not found.' });
+              res.status(404).json({ success: false, message: 'Blog post not found.' });
             } else {
               res.json(blogPost[0]); // Return success
             }

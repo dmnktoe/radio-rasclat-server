@@ -162,7 +162,7 @@ router.get('/show/:id', (req, res) => {
             res.json({ success: false, message: 'Not a valid show ID.' });
           } else {
             if (!show || show.length === 0) {
-              res.json({ success: false, message: 'Show not found.' });
+              res.status(404).json({ success: false, message: 'Show not found.' });
             } else {
               res.json(show[0]); // Return success
             }
@@ -221,7 +221,7 @@ router.get('/show/:id', (req, res) => {
             res.json({ success: false, message: 'Not a valid show ID.' });
           } else {
             if (show.length === 0) {
-              res.json({ success: false, message: 'Show not found.' });
+              res.status(404).json({ success: false, message: 'Show not found.' });
             } else {
               res.json(show[0]); // Return success
             }

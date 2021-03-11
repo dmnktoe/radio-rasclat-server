@@ -67,7 +67,7 @@ router.get('/genre/:id', (req, res) => {
             res.json({ success: false, message: 'Not a valid genre ID.' });
           } else {
             if (!genre || genre.length === 0) {
-              res.json({ success: false, message: 'Genre not found.' });
+              res.status(404).json({ success: false, message: 'Genre not found.' });
             } else {
               res.json(genre[0]); // Return success
             }
@@ -96,7 +96,7 @@ router.get('/genre/:id', (req, res) => {
             res.json({ success: false, message: 'Not a valid genre ID.' });
           } else {
             if (genre.length === 0) {
-              res.json({ success: false, message: 'Genre not found.' });
+              res.status(404).json({ success: false, message: 'Genre not found.' });
             } else {
               res.json(genre[0]); // Return success
             }

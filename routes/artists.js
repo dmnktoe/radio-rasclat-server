@@ -121,7 +121,7 @@ router.get('/artist/:id', (req, res) => {
             res.json({ success: false, message: 'Not a valid artist ID.' });
           } else {
             if (!artist || artist.length === 0) {
-              res.json({ success: false, message: 'Artist not found.' });
+              res.status(404).json({ success: false, message: 'Artist not found.' });
             } else {
               res.json(artist[0]); // Return success
             }
@@ -180,7 +180,7 @@ router.get('/artist/:id', (req, res) => {
             res.json({ success: false, message: 'Not a valid artist ID.' });
           } else {
             if (artist.length === 0) {
-              res.json({ success: false, message: 'Artist not found.' });
+              res.status(404).json({ success: false, message: 'Artist not found.' });
             } else {
               res.json(artist[0]); // Return success
             }
