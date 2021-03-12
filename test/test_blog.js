@@ -59,7 +59,7 @@ describe('Blog Posts', () => {
           .request(app)
           .get('/blog/post/' + '0a00a0000aa0aa0000a0000a')
           .end((err, res) => {
-            res.should.have.status(200);
+            res.should.have.status(404);
             res.body.should.be.a('object');
             res.body.should.have.property('success');
             res.body.should.have.property('message');
